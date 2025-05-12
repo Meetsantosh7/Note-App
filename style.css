@@ -1,0 +1,297 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4f46e5;
+    --secondary: #f59e0b;
+    --secondary-light: #fbbf24;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --background: #f9fafb;
+    --note-yellow: #fef3c7;
+    --note-border: #fde68a;
+    --white: #ffffff;
+    --danger: #ef4444;
+    --success: #10b981;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo i {
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box {
+    position: relative;
+    width: 250px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #e5e7eb;
+    border-radius: var(--radius);
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+search-box input:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.add-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.add-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.add-btn:active {
+    transform: translateY(0);
+}
+
+/* Main Content */
+main {
+    min-height: calc(100vh - 140px);
+    padding: 30px 0;
+    display: flex;         /* Correct for flex layout */
+    flex-wrap: wrap;       /* Correct for wrapping items to new rows */
+    /* flex-direction: row; is the default and correct here */
+    gap: 20px;
+    margin-top: 10px;
+}
+
+/* Note Styles */
+.note {
+    width: 300px;          /* Correct width for notes on larger screens */
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.note:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.note-header h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.note-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.note-actions i {
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 16px;
+}
+
+.note-actions i.fa-save:hover {
+    color: var(--success);
+}
+
+.note-actions i.fa-trash:hover {
+    color: var(--danger);
+}
+
+.note-title {
+    padding: 15px 15px 5px;
+    background-color: var(--note-yellow);
+    border-bottom: 1px solid var(--note-border);
+}
+
+.note-title textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark);
+    resize: none;
+    padding: 0;
+    height: 40px;
+}
+
+.note-content {
+    flex-grow: 1;
+    padding: 15px;
+    background-color: var(--note-yellow);
+}
+
+.note-content textarea {
+    width: 100%;
+    height: 180px;
+    background: transparent;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text-dark);
+    resize: none;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.note textarea:focus {
+    outline: none;
+}
+
+.note-footer {
+    padding: 8px 15px;
+    background-color: var(--note-yellow);
+    color: var(--text-light);
+    font-size: 12px;
+    text-align: right;
+    border-top: 1px solid var(--note-border);
+}
+
+/* Footer */
+footer {
+    background-color: var(--white);
+    padding: 15px 0;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 14px;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+    
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    main {
+        justify-content: flex-start; /* Changed from center to flex-start */
+    }
+    
+    .note {
+        width: 100%; /* Notes take full width on smaller screens, causing them to stack */
+        max-width: 350px;
+    }
+}
