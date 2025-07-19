@@ -1,13 +1,10 @@
-// DOM Elements
 const addBtn = document.querySelector("#addBtn");
 const main = document.querySelector("#main");
 const searchInput = document.querySelector("#searchInput");
 
-// Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
     loadNotes();
     
-    // Add search functionality
     searchInput.addEventListener("input", filterNotes);
 });
 
@@ -15,7 +12,6 @@ addBtn.addEventListener("click", () => {
     addNote();
 });
 
-// Functions
 function getCurrentDateTime() {
     const now = new Date();
     return now.toLocaleString();
@@ -45,13 +41,11 @@ function createNoteElement(id, title = "", content = "", timestamp = getCurrentD
         </div>
     `;
     
-    // Event listeners for the note
     const saveBtn = note.querySelector(".save");
     const deleteBtn = note.querySelector(".trash");
     const titleTextarea = note.querySelector(".note-title textarea");
     const contentTextarea = note.querySelector(".note-content textarea");
     
-    // Auto-resize textareas
     function autoResize(textarea) {
         textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + 'px';
@@ -65,24 +59,20 @@ function createNoteElement(id, title = "", content = "", timestamp = getCurrentD
         autoResize(contentTextarea);
     });
     
-    // Initialize heights
     setTimeout(() => {
         autoResize(titleTextarea);
         autoResize(contentTextarea);
     }, 0);
     
-    // Save note
     saveBtn.addEventListener("click", () => {
         updateNote(note);
         showSaveAnimation(saveBtn);
     });
     
-    // Delete note
     deleteBtn.addEventListener("click", () => {
         deleteNote(note);
     });
     
-    // Auto-save on input
     titleTextarea.addEventListener("blur", () => updateNote(note));
     contentTextarea.addEventListener("blur", () => updateNote(note));
     
@@ -94,14 +84,12 @@ function addNote(title = "", content = "", isInitializing = false) {
     const note = createNoteElement(id, title, content);
     
     if (isInitializing) {
-        main.appendChild(note); // Append if loading from storage to maintain order
+        main.appendChild(note);
     } else {
-        main.prepend(note); // Prepend for new notes to add them to the start (left)
+        main.prepend(note);
     }
     
-    // Add fade-in animation
     note.style.opacity = "0";
-    // Ensure element is in flow for prepended items before animating
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
             note.style.opacity = "1";
@@ -125,14 +113,12 @@ function updateNote(noteElement) {
     const content = contentTextarea.value.trim();
     const timestamp = getCurrentDateTime();
     
-    // Update the timestamp in the footer
     footerElement.textContent = `Last updated: ${timestamp}`;
     
     saveNotes();
 }
 
 function deleteNote(noteElement) {
-    // Add fade-out animation
     noteElement.style.opacity = "0";
     noteElement.style.transform = "scale(0.8)";
     
@@ -177,7 +163,6 @@ function loadNotes() {
     const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
     
     if (savedNotes.length === 0) {
-        // Add a welcome note if no notes exist
         addNote(
             "Welcome to Noteworthy!",
             "This is your new note-taking app. Here are some tips:\n\n• Click the + button to add a new note\n• Use the search box to find notes\n• Click the save icon to save your changes\n• Notes are automatically saved when you click outside the text area",
